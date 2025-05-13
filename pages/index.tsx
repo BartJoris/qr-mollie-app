@@ -34,14 +34,18 @@ export default function Home() {
   };
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
-      <h1>Mollie QR-betaling</h1>
+<main style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
+      <img src="/Babette.png" alt="Babette Logo" style={{ maxWidth: "400px", marginBottom: "1rem" }} />
+      <h2>Bedrag</h2>
+      <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>€</span>
       <input
-        type="number"
-        placeholder="Bedrag in euro"
+        type="tel"
+        inputMode="decimal"
+        pattern="[0-9]*"
+        placeholder="0,00"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        style={{ fontSize: "1.5rem", padding: "1rem", width: "200px", marginBottom: "1rem" }}
+        style={{ fontSize: "1.5rem", padding: "1rem", width: "80px", marginBottom: "1rem" }}
       />
       <br />
       <button onClick={startPayment} style={{ fontSize: "1.2rem", padding: "1rem 2rem" }}>
