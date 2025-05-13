@@ -1,4 +1,5 @@
-import { useState } from "react";
+'use client';
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [amount, setAmount] = useState("");
@@ -6,11 +7,21 @@ export default function Home() {
   const [status, setStatus] = useState("");
   const [paymentId, setPaymentId] = useState("");
 
-  const startPayment = async () => {
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialAmount = urlParams.get("amount");
+    if (initialAmount) {
+      setAmount(initialAmount);
+      startPayment(initialAmount);
+    }
+  }, []);
+
+  const startPayment = async (inputAmount?: string) => {
+    const value = inputAmount || amount;
     const res = await fetch("/api/mollie-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orderId: "POS-" + Date.now(), amount }),
+      body: JSON.stringify({ orderId: "POS-" + Date.now(), amount: value }),
     });
     const data = await res.json();
     setQrUrl(data.qrUrl);
@@ -34,21 +45,22 @@ export default function Home() {
   };
 
   return (
-<main style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
-      <img src="/Babette.png" alt="Babette Logo" style={{ maxWidth: "400px", marginBottom: "1rem" }} />
+    <main style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
+      <img src="/Babette.png" alt="Babette Logo" style={{ maxWidth: "280px", marginBottom: "1rem" }} />
       <h2>Bedrag</h2>
-      <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>€</span>
-      <input
-        type="tel"
-        inputMode="decimal"
-        pattern="[0-9]*"
-        placeholder="0,00"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        style={{ fontSize: "1.5rem", padding: "1rem", width: "80px", marginBottom: "1rem" }}
-      />
-      <br />
-      <button onClick={startPayment} style={{ fontSize: "1.2rem", padding: "1rem 2rem" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1rem" }}>
+        <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>€</span>
+        <input
+          type="tel"
+          inputMode="decimal"
+          pattern="[0-9]*"
+          placeholder="0,00"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          style={{ fontSize: "1.5rem", padding: "1rem", width: "100px" }}
+        />
+      </div>
+      <button onClick={() => startPayment()} style={{ fontSize: "1.2rem", padding: "1rem 2rem" }}>
         Genereer QR
       </button>
 
