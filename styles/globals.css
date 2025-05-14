@@ -1,0 +1,23 @@
+/* styles/globals.css */
+.qr-container.neutral {
+    border-color: #ccc;
+    background-color: #f9f9f9;
+  }
+  .qr-container.pending {
+    border-color: #007bff;
+    background-color: #eaf4ff;
+  }
+  .qr-container.authorized {
+    border-color: #ff9800;
+    background-color: #fff3e0;
+  }
+  .qr-container.paid {
+    border-color: #4caf50;
+    background-color: #e6f4ea;
+  }
+  .qr-container.failed,
+  .qr-container.refunded {
+    border-color: #f44336;
+    background-color: #ffe6e6;
+  }
+  

@@ -9,6 +9,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
 
+  if (!response.ok) {
+    return res.status(response.status).json({ error: "Failed to fetch payment status" });
+  }
+
   const json = await response.json();
-  res.status(200).json({ status: json.status });
+  const status = json.status;
+
+  const messages: Record<string, string> = {
+    open: "💤 Betaling nog niet gestart",
+    pending: "⏳ Betaling in verwerking",
+    authorized: "🔒 Betaling geautoriseerd, wacht op bevestiging",
+    paid: "✅ Betaling ontvangen!",
+    failed: "❌ Betaling mislukt",
+    expired: "⌛ QR-code verlopen",
+    canceled: "🚫 Betaling geannuleerd",
+    refunded: "↩️ Betaling terugbetaald",
+    charged_back: "⚠️ Betaling teruggevorderd",
+  };
+
+  const message = messages[status] || `⚠️ Onbekende status: ${status}`;
+  res.status(200).json({ status, message });
 }
