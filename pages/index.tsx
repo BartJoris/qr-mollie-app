@@ -79,7 +79,7 @@ export default function Home() {
         textAlign: "center",
       }}
     >
-      <img src="/Babette.png" alt="Babette Logo" style={{ maxWidth: "180px", margin: "2rem auto 1rem" }} />
+      <img src="/Babette.png" alt="Babette Logo" style={{ maxWidth: "190px", margin: "2rem auto 1rem" }} />
 
       <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Bedrag</h2>
 
