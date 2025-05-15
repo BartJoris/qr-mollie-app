@@ -129,7 +129,17 @@ export default function Home() {
             backgroundColor: "#fff",
           }}
         >
-          <img src={qrUrl} alt="Mollie QR Code" width="250" height="250" />
+          <img
+            src={qrUrl}
+            alt="Mollie QR Code"
+            style={{
+              width: "250px",
+              height: "250px",
+              imageRendering: "pixelated",
+              display: "block",
+              margin: "0 auto",
+            }}
+          />
           <p style={{ fontSize: "1.1rem", marginTop: "1rem" }}>{status}</p>
         </div>
       )}
