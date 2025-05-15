@@ -83,7 +83,7 @@ export default function Home() {
 
       <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Bedrag</h2>
 
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1.5rem" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1rem" }}>
         <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>€</span>
         <input
           type="tel"
@@ -102,46 +102,36 @@ export default function Home() {
         />
       </div>
 
-      <button
-        onClick={() => startPayment()}
-        style={{
-          fontSize: "1rem",
-          padding: "0.75rem 1.5rem",
-          backgroundColor: "#eee",
-          border: "1px solid #ccc",
-          borderRadius: "6px",
-          cursor: "pointer",
-          marginBottom: "2rem",
-        }}
-      >
-        Genereer QR
-      </button>
-
-      {qrUrl && (
-        <div
-          className={`qr-container ${statusClass}`}
+      <div style={{ marginBottom: "2rem" }}>
+        <button
+          onClick={() => startPayment()}
           style={{
-            border: "3px solid",
-            borderRadius: "12px",
-            padding: "1rem",
-            display: "inline-block",
-            transition: "all 0.3s ease",
-            backgroundColor: "#fff",
+            fontSize: "1rem",
+            padding: "0.75rem 1.5rem",
+            backgroundColor: "#eee",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            cursor: "pointer",
           }}
         >
-          <img
-            src={qrUrl}
-            alt="Mollie QR Code"
-            style={{
-              width: "250px",
-              height: "250px",
-              imageRendering: "pixelated",
-              display: "block",
-              margin: "0 auto",
-            }}
-          />
-          <p style={{ fontSize: "1.1rem", marginTop: "1rem" }}>{status}</p>
-        </div>
+          Genereer QR
+        </button>
+      </div>
+
+      {qrUrl && (
+        <>
+          <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+            <img
+              src={qrUrl}
+              alt="Mollie QR Code"
+              style={{
+                marginTop: "0.5rem",
+                marginBottom: "1rem",
+              }}
+            />
+          </div>
+          <p style={{ fontSize: "1.1rem", marginTop: "0.5rem", color: "#333" }}>{status}</p>
+        </>
       )}
 
       <audio ref={audioRef} src="/success.mp3" preload="auto" />
